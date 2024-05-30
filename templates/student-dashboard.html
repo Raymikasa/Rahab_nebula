@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="icon" href="data:,">
+    <style>
+        .dashboard-links {
+            margin-top: 0.2in;
+            display: flex;
+            justify-content: space-between;
+            padding-left: 0.6in;
+            padding-right: 0.6in;
+        }
+        .dashboard-links a {
+            text-decoration: none;
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-links">
+        <a href="http://127.0.0.1:5000" class="nebula-dock-link">
+            <span class="rocket-icon">&#128640;</span> Nebula - dock
+        </a>
+        <a href="{{ url_for('config') }}" class="dashboard-link">
+            <span class="settings-icon">&#9881;</span> Configurations
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Student Dashboard</h1>
+        <form>
+            <div class="select-container">
+                <select class="js-example-basic-single" name="names" id="names">
+                    <option value="">--- Select/search a student ---</option>
+                </select>
+                <select class="js-example-basic-single" name="cohorts" id="cohorts">
+                    <option value="">--- Search/select a cohort ---</option>
+                </select>
+            </div>
+    
+            <div class="additional-elements">
+                <div id="attendance_average" class="additional-element">
+                    <span class="icon">&#128100;</span>
+                    <span class="element-name">Attendance Average (avg)</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="assignment_completion" class="additional-element">
+                    <span class="icon">&#128221;</span>
+                    <span class="element-name">Assignment Completion (avg)</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="cohort" class="additional-element">
+                    <span class="icon">&#128101;</span>
+                    <span class="element-name">Cohort</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="ranking" class="additional-element">
+                    <span class="icon">&#127942;</span>
+                    <span class="element-name">Ranking</span>
+                    <span class="element-value">N/A</span>
+                </div>
+                <div id="total_students" class="additional-element">
+                    <span class="icon">&#128101;&#128101;</span>
+                    <span class="element-name">Total Students</span>
+                    <span class="element-value">N/A</span>
+                </div>
+            </div>
+        
+            <div id="cohort-performance-graph" class="chart-container" style="width: 50%;">
+                <canvas id="cohort-performance-chart" width="700" height="200"></canvas>
+            </div>
+        </form>
+
+            
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

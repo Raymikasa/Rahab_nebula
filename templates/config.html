@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Set the page background color to white */
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0.5in auto; /* Add margin of 0.5 inches from the top of the page and auto margin on left and right */
+            padding: 20px;
+            background-color: #f0f0f0; /* Set the container background color to light grey */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-height: calc(100vh - 0.5in); /* Ensure container takes at least the full height of the viewport minus half an inch */
+            display: flex; /* Use flexbox layout */
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: space-between; /* Push elements to the top and bottom */
+            align-items: center; /* Center items horizontally */
+        }
+        h1, h2, p {
+            text-align: center;
+        }
+        .purple-text {
+            color: purple;
+        }
+        .dashboard-links {
+            margin-top: 0.2in; /* Adjust top margin to 0.2 inches */
+            display: flex; /* Use flexbox layout */
+            justify-content: space-between; /* Align items with space between */
+            padding-left: 0.5in; /* Add padding to the left */
+            padding-right: 0.5in; /* Add padding to the right */
+            width: calc(100% - 1in); /* Subtract the total padding from the width */
+        }
+        .dashboard-links a {
+            text-decoration: none; /* Remove underline from links */
+            color: blue; /* Set link color to blue */
+            font-weight: bold; /* Make the text bold */
+        }
+        /* Custom styling for buttons */
+        button {
+            width: 50%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #test_backend_button {
+            background-color: blue;
+            color: white;
+        }
+        #save_backend_button {
+            background-color: black;
+            color: white;
+        }
+        #test_database_button {
+            background-color: maroon;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard links -->
+    <div class="dashboard-links">
+        <a href="http://127.0.0.1:5000" class="nebula-dock-link">
+            <span class="rocket-icon">&#128640;</span> Nebula - dock
+        </a>
+        
+        <a href="{{ url_for('student_dashboard') }}" class="dashboard-link">
+            <span class="clock-icon">&#128339;</span> Student Dashboard
+        </a>
+    </div>
+
+    <div class="container">
+        <form id="db_config_form">
+
+            <h1>Configurations</h1>
+
+            <h2>[A] Server Configuration</h2>
+            <p>Testing on "<span id="health_check_url" class="purple-text">..backendurl/api/health-check</span>"</p>
+            <label for="backend_url_input">Backend URL:</label>
+            <input type="text" id="backend_url_input" name="backend_url" style="width: 50%;">
+            <button id="test_backend_button" onclick="testBackendURL()">Test Backend URL</button>
+            <button id="save_backend_button" onclick="saveBackendURL()" disabled>Save Backend URL</button>
+
+
+            <h2>[B] Database Configuration</h2>
+            <p>Testing on "<span id="test_db_url" class="purple-text">..backendurl/api/test-db-connection</span>"</p>
+            <label for="db_host">Database Host:</label>
+            <input type="text" id="db_host" name="db_host"><br><br>
+            <label for="db_user">Database User:</label>
+            <input type="text" id="db_user" name="db_user"><br><br>
+            <label for="db_password">Database Password:</label>
+            <input type="password" id="db_password" name="db_password"><br><br>
+            <label for="db_name">Database Name:</label>
+            <input type="text" id="db_name" name="db_name">
+            <br><br>
+            <button id="test_database_button" type="button" onclick="testDatabaseConnection()">Test Database Connection</button>
+        </form>
+
+        <br>
+
+        <div class="images-container">
+            <!-- Images here -->
+        </div>
+        <div class="copyright">
+            &copy;2024 - Josphat Langat
+        </div>
+    </div>
+
+    <script>
+        function testBackendURL() {
+        var backendURL = document.getElementById("backend_url_input").value;
+
+        // Check if the backend URL is either localhost or 127.0.0.1 with port 5000
+        if (backendURL === "http://localhost:5000" || backendURL === "http://127.0.0.1:5000/") {
+            alert("Backend Connection Successful");
+
+            // If successful, enable the save button
+            document.getElementById("save_backend_button").disabled = false;
+        } else {
+            alert("Backend Connection Failed");
+            // If failed, disable the save button
+            document.getElementById("save_backend_button").disabled = true;
+        }
+            }
+
+        function saveBackendURL() {
+                var backendURL = document.getElementById("backend_url_input").value;
+                document.getElementById("backend_url").innerText = backendURL;
+                alert("Backend URL Saved Successfully");
+            }
+        
+        function testDatabaseConnection() {
+            var formData = new FormData(document.getElementById("db_config_form"));
+            fetch("/api/test-db-connection", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Database Connection Test Result:\n" + JSON.stringify(data));
+            })
+            .catch(error => {
+                console.error("Error testing database connection:", error);
+                alert("Error occurred while testing database connection. Please check console for details.");
+            });
+        }
+    </script>
+    
+</body>
+</html>

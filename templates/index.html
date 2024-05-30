@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nebula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Set the page background color to white */
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0.5in auto 0; /* Add margin of 0.5 inches from the top of the page */
+            padding: 20px;
+            background-color: #f0f0f0; /* Set the container background color to light grey */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-height: calc(100vh - 0.5in); /* Ensure container takes at least the full height of the viewport minus half an inch */
+            display: flex; /* Use flexbox layout */
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: space-between; /* Push elements to the top and bottom */
+            border: 2px solid #cccccc; /* Add border */
+            border-top: 0; /* Remove top border */
+        }
+        h1, p {
+            text-align: center;
+        }
+        .images-container {
+            display: flex; /* Use flexbox layout */
+            justify-content: space-between; /* Space the images evenly */
+            width: 100%; /* Ensure full width */
+            margin-bottom: 20px;
+        }
+        .image-container {
+            flex: 1; /* Each image container takes equal space */
+            margin: 0 5px; /* Add some spacing between images */
+            text-align: center; /* Center the images */
+        }
+        img {
+            max-width: 100%; /* Ensure image fits its container */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove any default inline behavior */
+            margin: 0 auto; /* Center the image horizontally */
+        }
+        .first-image {
+            max-height: 300px; /* Adjust the height of the first image */
+        }
+        .second-image {
+            max-height: 350px; /* Adjust the height of the second image */
+        }
+        .copyright {
+            color: #666666;
+            font-size: 12px;
+            margin-top: auto; /* Push copyright to the bottom */
+            margin-bottom: 0.5in; /* Set the bottom margin to half an inch */
+        }
+        .dashboard-links {
+            margin-top: 0.5in; /* Set top margin for the links */
+            margin-left: 0.5in; /* Set left margin for the links */
+            margin-right: 0.5in; /* Set right margin for the links */
+            display: flex; /* Use flexbox layout */
+            justify-content: space-between; /* Space the links evenly */
+        }
+        .dashboard-link {
+            font-size: 16px; /* Increase font size for the link */
+            text-decoration: none; /* Remove underline from the link */
+            color: blue; /* Set link color to blue */
+            font-weight: bold; /* Make link text bold */
+            display: flex; /* Use flexbox layout */
+            align-items: center; /* Center vertically */
+        }
+        .clock-icon {
+            margin-right: 5px; /* Add space between clock icon and text */
+            font-size: 20px; /* Adjust clock icon size */
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-links">
+        <!-- Add link to config.html -->
+        <a href="{{ url_for('config') }}" class="dashboard-link">
+            <span class="settings-icon">&#9881;</span> Configurations
+        </a>
+        
+        <a href="{{ url_for('student_dashboard') }}" class="dashboard-link">
+            <span class="clock-icon">&#128339;</span> Student Dashboard
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Azubi Africa: Project Nebula</h1>
+        <p><strong>Objective:</strong> A centralized, interactive platform that will serve as the nerve center for all Azubi Africa's operational, educational, and community engagement needs.</p>
+        <div class="images-container">
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='nebula.png') }}" alt="Image 1" class="first-image">
+            </div>
+            <div class="image-container">
+                <img src="{{ url_for('static', filename='A centralized intera.jpg') }}" alt="Image 2" class="second-image">
+            </div>
+        </div>
+        <div class="copyright">
+            &copy;2024 - Josphat Langat
+        </div>
+    </div>
+</body>
+</html>

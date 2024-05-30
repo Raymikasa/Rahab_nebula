@@ -1,0 +1,126 @@
+/* styles.css */
+
+body {
+    margin: 0.5in auto;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.select-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+select {
+    width: calc(48% - 5px);
+    padding: 5px;
+    background-color: #ffffff;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    text-align-last: center;
+}
+
+select:hover {
+    border-color: blue;
+}
+
+h1 {
+    text-align: center;
+}
+
+.additional-element {
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 10px;
+    width: calc(25% - 20px);
+    max-width: 250px;
+    background-color: #ffffff;
+    border: 2px solid #cccccc;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.additional-element .icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.additional-elements {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.2in;
+    position: relative;
+}
+
+.additional-elements::before,
+.additional-elements::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.additional-elements::before {
+    top: -0.05in;
+}
+
+.additional-elements::after {
+    bottom: -0.1in;
+}
+
+.element-name {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.element-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: green;
+}
+
+#cohort {
+    color: blue;
+}
+
+#ranking {
+    color: purple;
+}
+
+.chart-container {
+    margin-top: 20px; /* Adjust margin-top as needed */
+}
+
+#cohort-performance-graph {
+    width: 100%; /* Remove fixed width */
+}
+
+#cohort-performance-chart {
+    width: 100%;
+    height: auto;
+}
+
+/* New styles to ensure the text fits */
+.additional-element .element-name {
+    font-size: calc(10px + 0.5vw); /* Responsive font size */
+    max-width: 100%;
+    white-space: normal; /* Allow text to wrap */
+    text-align: center;
